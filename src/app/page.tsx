@@ -5,15 +5,22 @@ import { Header } from './components/Header'
 import Input from './components/Input'
 import { load } from './services/api'
 import { RepositoryCard } from './components/RepositoryCard'
+import { Modal } from './components/Modal'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from './redux/store'
+import { closeModal, openModal } from './redux/modalSlice'
 
-interface searchResult {
+interface SearchResult {
   name: string
   login: string
   description: string | null
 }
 
 export default function Home() {
-  const [repositories, setRepositories] = useState<searchResult[]>([])
+  const [repositories, setRepositories] = useState<SearchResult[]>([])
+
+  const dispatch = useDispatch()
+  const { isOpen } = useSelector((state: RootState) => state.modal)
 
   const handleSearch = async (searchValue: string) => {
     try {
@@ -29,6 +36,10 @@ export default function Home() {
     } catch (error) {
       console.error('Erro ao carregar repositórios:', error)
     }
+  }
+
+  const handleCardClick = (repo: SearchResult) => {
+    dispatch(openModal({ owner: repo.login, repoName: repo.name }))
   }
 
   return (
@@ -50,10 +61,15 @@ export default function Home() {
       {repositories && (
         <div className="users-list">
           {repositories.map((repo, index) => (
-            <RepositoryCard repository={repo} key={index} />
+            <RepositoryCard
+              repository={repo}
+              key={index}
+              onClick={() => handleCardClick(repo)}
+            />
           ))}
         </div>
       )}
+      <Modal isOpen={isOpen} onClose={() => dispatch(closeModal())} />
     </main>
   )
 }
