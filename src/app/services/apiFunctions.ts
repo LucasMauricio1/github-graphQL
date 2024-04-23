@@ -1,15 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { RepositoryDetails } from './apiTypes'
+import { RepositoryDetails, SearchResult } from './apiTypes'
 import { load } from './api'
 import { setAfterCursor } from '../redux/cursorSlice'
 import { setSearchValue } from '../redux/searchSlice'
 import { Dispatch } from 'redux'
-
-interface SearchResult {
-  name: string
-  login: string
-  description: string | null
-}
 
 export const handleSearch = async (searchValue: string, dispatch: Dispatch) => {
   dispatch(setSearchValue(searchValue))

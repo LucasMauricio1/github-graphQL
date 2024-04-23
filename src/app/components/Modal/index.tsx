@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { formatDateToBr } from '@/app/utils/formatDate'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/app/redux/store'
+import { Icon } from '../Icon'
 
 interface ModalProps {
   isOpen: boolean
@@ -48,25 +49,14 @@ export function Modal({ isOpen, onClose }: ModalProps) {
             repositoryDetails && (
               <div className="flex h-full w-full items-center justify-center bg-black bg-opacity-50 backdrop-blur-md">
                 <div className="modal-content max-w-[80%] rounded-lg bg-white p-6 shadow-md">
-                  <button
-                    onClick={onClose}
-                    className="absolute right-2 top-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                  <div className="flex w-full justify-end">
+                    <button
+                      onClick={onClose}
+                      className="text-gray-500 hover:opacity-80 focus:outline-none"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
+                      <Icon name="X" color="gray" size={25} />
+                    </button>
+                  </div>
                   <div className="mb-4 flex flex-col items-center justify-center">
                     <Image
                       src={`https://avatars.githubusercontent.com/${owner}`}

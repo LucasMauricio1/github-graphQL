@@ -12,12 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import { closeModal, openModal } from './redux/modalSlice'
 import { handleLoadMore, handleSearch } from './services/apiFunctions'
-
-interface SearchResult {
-  name: string
-  login: string
-  description: string | null
-}
+import { SearchResult } from './services/apiTypes'
 
 export default function Home() {
   const [repositories, setRepositories] = useState<SearchResult[]>([])
@@ -42,7 +37,7 @@ export default function Home() {
     try {
       if (searchValue && afterCursor) {
         const result = await handleLoadMore(searchValue, afterCursor, dispatch)
-        setRepositories((prev) => [...prev, ...result])
+        setRepositories((prevRepositories) => [...prevRepositories, ...result])
       }
     } catch (error) {
       console.error('Erro ao lidar com a carga adicional:', error)
@@ -60,7 +55,7 @@ export default function Home() {
         subtitle="Procure por repositórios de qualquer desenvolvedor do mundo no GitHub"
       />
       <div className="mt-2 flex w-full items-center justify-center p-4">
-        <div className="flex w-1/2 flex-col border border-white p-4">
+        <div className="flex w-1/2 flex-col border border-white bg-white bg-opacity-40 p-4">
           <InputSearch
             type="text"
             placeholder="Pesquisar"
@@ -80,7 +75,9 @@ export default function Home() {
           ))}
         </div>
       )}
-      {repositories.length > 0 && <Cursor onClick={handleLoadMoreClick} />}
+      {repositories.length > 0 && repositories.length >= 50 && (
+        <Cursor onClick={handleLoadMoreClick} />
+      )}
       <Modal isOpen={isOpen} onClose={() => dispatch(closeModal())} />
     </main>
   )

@@ -20,3 +20,9 @@ export interface RepositoryDetails {
     }
   }
 }
+
+export interface SearchResult {
+  name: string
+  login: string
+  description: string | null
+}

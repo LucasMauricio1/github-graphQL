@@ -1,4 +1,5 @@
 import React, { InputHTMLAttributes, forwardRef, useState } from 'react'
+import { Icon } from '../Icon'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   onSearch?: (value: string) => void
@@ -19,7 +20,7 @@ function InputComponent(
   }
 
   return (
-    <>
+    <div className="relative">
       <input
         type={type}
         name={name}
@@ -27,8 +28,12 @@ function InputComponent(
         ref={ref}
         value={value}
         onChange={handleChange}
+        className="w-full rounded-md border py-2 pl-10 pr-3"
       />
-    </>
+      <span className="absolute left-3 top-0 mt-3">
+        <Icon name="Search" color="gray" size={20} />
+      </span>
+    </div>
   )
 }
 
