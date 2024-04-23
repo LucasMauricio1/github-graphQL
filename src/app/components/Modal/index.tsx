@@ -67,7 +67,7 @@ export function Modal({ isOpen, onClose }: ModalProps) {
                       />
                     </svg>
                   </button>
-                  <div className="mb-4 flex items-center justify-center">
+                  <div className="mb-4 flex flex-col items-center justify-center">
                     <Image
                       src={`https://avatars.githubusercontent.com/${owner}`}
                       alt={`${owner}-avatar`}
@@ -75,7 +75,10 @@ export function Modal({ isOpen, onClose }: ModalProps) {
                       height={48}
                       className="rounded-full object-cover"
                     />
-                    <h2 className="ml-2 text-xl font-semibold">
+                    <h1 className="ml-2 text-xl font-semibold text-cyan-900">
+                      {repositoryDetails.owner.login}
+                    </h1>
+                    <h2 className="ml-2 text-lg font-semibold">
                       {repositoryDetails.name}
                     </h2>
                   </div>

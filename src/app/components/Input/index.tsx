@@ -1,14 +1,12 @@
-'use client'
-
 import React, { InputHTMLAttributes, forwardRef, useState } from 'react'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   onSearch?: (value: string) => void
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(function InputComponent(
-  { type = 'text', name = '', onSearch, ...props },
-  ref,
+function InputComponent(
+  { type = 'text', name = '', onSearch, ...props }: InputProps,
+  ref: React.Ref<HTMLInputElement>,
 ) {
   const [value, setValue] = useState('')
 
@@ -19,6 +17,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function InputComponent(
       onSearch(value)
     }
   }
+
   return (
     <>
       <input
@@ -31,7 +30,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function InputComponent(
       />
     </>
   )
-})
+}
+
+const Input = forwardRef<HTMLInputElement, InputProps>(InputComponent)
 Input.displayName = 'Input'
 
 export default Input

@@ -1,14 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { Header } from './components/Header'
-import Input from './components/Input'
-import { load } from './services/api'
-import { RepositoryCard } from './components/RepositoryCard'
-import { Modal } from './components/Modal'
+import {
+  InputSearch,
+  Header,
+  RepositoryCard,
+  Modal,
+  Cursor,
+} from './components'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 import { closeModal, openModal } from './redux/modalSlice'
+import { handleLoadMore, handleSearch } from './services/apiFunctions'
 
 interface SearchResult {
   name: string
@@ -21,20 +24,28 @@ export default function Home() {
 
   const dispatch = useDispatch()
   const { isOpen } = useSelector((state: RootState) => state.modal)
+  const { afterCursor } = useSelector((state: RootState) => state.cursor)
+  const { searchValue } = useSelector((state: RootState) => state.search)
 
-  const handleSearch = async (searchValue: string) => {
+  const handleSearchValue = async (value: string) => {
     try {
-      const data = await load(searchValue)
-
-      const mappedData = data.map((repo: any) => ({
-        name: repo.name,
-        description: repo.description,
-        login: repo.owner.login,
-      }))
-
-      setRepositories(mappedData)
+      const result = await handleSearch(value, dispatch)
+      if (result) {
+        setRepositories(result)
+      }
     } catch (error) {
-      console.error('Erro ao carregar repositórios:', error)
+      console.error('Erro ao lidar com a busca:', error)
+    }
+  }
+
+  const handleLoadMoreClick = async () => {
+    try {
+      if (searchValue && afterCursor) {
+        const result = await handleLoadMore(searchValue, afterCursor, dispatch)
+        setRepositories((prev) => [...prev, ...result])
+      }
+    } catch (error) {
+      console.error('Erro ao lidar com a carga adicional:', error)
     }
   }
 
@@ -50,11 +61,11 @@ export default function Home() {
       />
       <div className="mt-2 flex w-full items-center justify-center p-4">
         <div className="flex w-1/2 flex-col border border-white p-4">
-          <Input
+          <InputSearch
             type="text"
             placeholder="Pesquisar"
             className="w-full p-2"
-            onSearch={handleSearch}
+            onSearch={(searchValue) => handleSearchValue(searchValue)}
           />
         </div>
       </div>
@@ -69,6 +80,7 @@ export default function Home() {
           ))}
         </div>
       )}
+      {repositories.length > 0 && <Cursor onClick={handleLoadMoreClick} />}
       <Modal isOpen={isOpen} onClose={() => dispatch(closeModal())} />
     </main>
   )
