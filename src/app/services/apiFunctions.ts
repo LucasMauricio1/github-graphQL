@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { RepositoryDetails, SearchResult } from './apiTypes'
 import { load } from './api'
 import { setAfterCursor } from '../redux/cursorSlice'

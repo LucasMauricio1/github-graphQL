@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Visualização de Repositórios do GitHub🚀</h1>
 
-## Getting Started
+> O projeto é uma integração com a API GraphQL do GitHub.
 
-First, run the development server:
+## :page_facing_up: Explicação
+
+Você tera um campo de pesquisa onde colocará o nome de qualquer repositório, ele vai fazer a listagem dos primeiros 50.
+
+Mais abaixo você poderá carregar mais, caso necessário que ele vai carregar mais 50...
+
+A listagem vai mostrar o nome do repositório, nome do proprietário e uma breve descrição do projeto, caso ouver.
+
+Ao clicar em algum card, você verá um modal abrir e ele vai carregar mais informações daquele repositório, como: foto, quantidadee de commits, issues abertar, pull-requests abertos, estrelas ganhas e a data da criação.
+
+## :dart: Passos
+
+:heavy_check_mark: Componente Header;\
+:heavy_check_mark: Componente Input;\
+:heavy_check_mark: Criação do card de listagem;\
+:heavy_check_mark: Conexão com a API do GitHub;\
+:heavy_check_mark: Salvar resultado da api;\
+:heavy_check_mark: Mapear os dados e colocar no card;\
+:heavy_check_mark: Criação do modal;\
+:heavy_check_mark: Exibir um repositório específico;\
+:heavy_check_mark: Implementação do Redux;\
+:heavy_check_mark: Criação dos states;\
+:heavy_check_mark: Responsividade;\
+:heavy_check_mark: Melhorias nas funções de listagem;\
+:heavy_check_mark: Componente de ícone;
+
+## :rocket: Tecnologias
+
+As seguintes ferramentas foram utilizadas neste projeto:
+
+- [NextJs](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org)
+- [LucideIcons](https://lucide.dev/guide/packages/lucide-react)
+- [GitHub GraphQL](https://docs.github.com/en/graphql)
+- [TailwindCSS](https://tailwindcss.com/)
+
+## :closed_book: Requisitos ##
+
+Antes de começar, você precisa ter [Git](https://git-scm.com) e [Node](https://nodejs.org/en/) instalados em seu computador.
+Crie um token pessoal no GitHub, informações em: <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">GitHub Chaves Pessoais</a>
+
+## :checkered_flag: Getting Started ##
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone o projeto
+$ git clone https://github.com/LucasMauricio1/github-graphQL
+# Accesso
+$ cd github-graphQL
+# Instalando dependencias
+$ yarn ou npm i
+# crie um arquivo .env.local na raiz do seu projeto e cole o seguinte:
+$ NEXT_PUBLIC_GITHUB_TOKEN=sua_chave_privada
+# rode o comando
+$ yarn dev ou npm run dev
+# O servidor iniciará na porta: <http://localhost:3000>
 ```
+## 🤝 Contribuidores
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Queremos agradecer às seguintes pessoas que contribuíram para este projeto:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/122059282?s=400&u=96bc9300d660f1b489efcfb0a557ab08a6298c99&v=4" width="100px;" alt="Lucas Mauricio"/><br>
+        <sub>
+          <b>Lucas Maurício</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
